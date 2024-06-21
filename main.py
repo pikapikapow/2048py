@@ -88,6 +88,39 @@ def draw(window, tiles):
 
     pygame.display.update()
 
+
+def get_random_pos(tiles):
+    row = None
+    col = None
+    while True:
+        row = random.randrange(0, ROWS)
+        col = random.randrange(0, COLS)
+
+        if f"{row}{col}" not in tiles:
+            break
+
+    return row, col
+
+# def move_tiles(window, tiles, clock, direction):
+#     updated = True
+#     blocks = set()
+
+#     if direction == "left":
+#         sort_func = lambda x: x.col
+#         reverse = False
+#         delta = (-MOVE_VEL, 0)
+#         boundary_check = lambda tile: tile.col == 0
+#         get_next_tile = lambda tile: tiles.get(f"{tile.row}{tile.col - 1}")
+#         merge_check = lambda tile, next_tile: tile.x > next_tile.x + MOVE_VEL
+
+#     elif direction == "right":
+#         pass
+#     elif direction == "up":
+#         pass
+#     elif direction == "down":
+#         pass
+
+
 def generate_tiles():
     tiles = {}
     for _ in range(2):
@@ -100,7 +133,7 @@ def main(window):
     clock = pygame.time.Clock()
     run = True
 
-    tiles = {}
+    tiles = generate_tiles()
     
     while run:
         clock.tick(FPS)
